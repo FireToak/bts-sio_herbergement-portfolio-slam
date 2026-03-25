@@ -1,6 +1,6 @@
 # Cahier des charges : Infrastructure d'hébergement Web
 
-![Bannière BTS SIO](assets/banniere_bts-sio.png)
+![Bannière BTS SIO](../assets/banniere_bts-sio.png)
 
 ## Informations
 
