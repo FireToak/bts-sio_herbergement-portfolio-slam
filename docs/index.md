@@ -1,4 +1,4 @@
-# 📚 Accueil - Documentation Technique
+# 📚 Accueil
 
 ![Bannière BTS SIO](assets/banniere_bts-sio.png)
 

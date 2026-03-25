@@ -34,7 +34,7 @@ Ce dépôt Git héberge le code source de la documentation technique du projet d
 1.  **Cloner le dépôt et y accéder**
 
 ```bash
-git clone <url_du_depot>
+git clone https://github.com/FireToak/bts-sio_herbergement-portfolio-slam.git
 cd bts-sio_herbergement-portfolio-slam
 ```
 
