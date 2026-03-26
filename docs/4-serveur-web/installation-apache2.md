@@ -1,4 +1,4 @@
-# Cahier des charges : Infrastructure d'hébergement Web
+# Mise en place de Apache 2
 
 ![Bannière BTS SIO](../assets/banniere_bts-sio.png)
 
