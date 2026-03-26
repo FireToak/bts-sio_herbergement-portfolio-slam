@@ -164,7 +164,7 @@ Voici la section rédigée avec un ton professionnel et intégrant l'automatisat
 ---
 ## 5. Chiffrement TLS (Let's Encrypt et API DNS)
 
-L'infrastructure requiert des certificats Wildcard (`*.domaine.ext`) pour couvrir dynamiquement les sous-domaines des projets. La validation s'effectue par un challenge DNS (preuve de possession) automatisé via l'API de l'hébergeur (Infomaniak).
+L'infrastructure requiert des certificats Wildcard (`*.bts-sio.eu`) pour couvrir dynamiquement les sous-domaines des projets. La validation s'effectue par un challenge DNS (preuve de possession) automatisé via l'API de l'hébergeur (Infomaniak).
 
 1. **Installation du client ACME et du module d'interface de programmation (API).** Mise en place de Certbot et de son greffon spécifique pour communiquer avec le fournisseur de nom de domaine.
 
@@ -183,7 +183,7 @@ L'infrastructure requiert des certificats Wildcard (`*.domaine.ext`) pour couvri
 
     ```bash
     sudo mkdir -p /etc/letsencrypt
-    echo "dns_infomaniak_token = VOTRE_TOKEN_API" | sudo tee /etc/letsencrypt/infomaniak.ini
+    echo "dns_infomaniak_token = TOKEN_API" | sudo tee /etc/letsencrypt/infomaniak.ini
     sudo chmod 600 /etc/letsencrypt/infomaniak.ini
     ```
 
@@ -194,7 +194,7 @@ L'infrastructure requiert des certificats Wildcard (`*.domaine.ext`) pour couvri
 3. **Provisionnement automatisé du certificat Wildcard.** Lancement de la requête de création. Le module se connecte à l'API, crée l'enregistrement DNS TXT temporaire de validation, valide le domaine et supprime la trace DNS.
 
     ```bash
-    sudo certbot certonly --authenticator dns-infomaniak --dns-infomaniak-credentials /etc/letsencrypt/infomaniak.ini -d "*.domaine_vps.ext" -d "domaine_vps.ext" --non-interactive --agree-tos -m admin@domaine_vps.ext
+    sudo certbot certonly --authenticator dns-infomaniak --dns-infomaniak-credentials /etc/letsencrypt/infomaniak.ini -d "*.bts-sio.eu" -d "bts-sio.eu" --non-interactive --agree-tos -m admin@domaine_vps.ext
     ```
 
     `certonly` : Demande uniquement la génération du certificat sans modifier la configuration du serveur web.
