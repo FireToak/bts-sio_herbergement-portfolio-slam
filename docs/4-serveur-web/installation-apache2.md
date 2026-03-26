@@ -37,6 +37,17 @@ Déploiement et sécurisation d'un serveur web Apache2 sur Debian 12 pour héber
 
     `-y` : Valide automatiquement les demandes de confirmation durant l'installation.
 
+2. **Désactivation du VirtualHost par défaut.** Suppression de la page d'accueil d'installation d'Apache pour éviter d'exposer des informations sur le serveur et s'assurer que seuls les sites configurés répondent.
+
+    ```Bash
+    sudo a2dissite 000-default.conf
+    sudo systemctl reload apache2
+    ```
+
+    `a2dissite (Apache2 Disable Site)` : Désactive un site en supprimant le lien symbolique correspondant dans le répertoire `/etc/apache2/sites-enabled/`.
+
+    `systemctl reload` : Demande au service de recharger sa configuration à chaud, ce qui applique la désactivation sans interrompre les autres sites en cours d'exécution.
+
 ---
 ## 2. Sécurité applicative (En-têtes HTTP)
 
