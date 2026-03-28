@@ -1,5 +1,7 @@
 # Configuration d'Apache 2
 
+![Bannière BTS SIO](../assets/banniere_bts-sio.png)
+
 ## Informations
 
   - **Auteur :** Louis MEDO
