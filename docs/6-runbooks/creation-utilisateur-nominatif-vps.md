@@ -38,7 +38,7 @@ Cette procédure explique comment créer un compte administrateur nominatif sur 
 2.  **Accorder les privilèges d'administration.** Le nouvel utilisateur doit pouvoir exécuter des tâches de maintenance.
 
     ```bash
-    sudo usermod -aG sudo lmedo
+    sudo usermod -aG sudo louismedo
     ```
 
     `usermod` : Utilitaire de modification d'un compte utilisateur existant.

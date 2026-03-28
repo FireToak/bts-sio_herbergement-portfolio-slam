@@ -151,7 +151,7 @@ Cette procédure détaille la phase d'initialisation (Build) d'un serveur VPS so
 
 ## 6. Politique de gestion des accès administrateurs
 
-1.  **Désactiver le compte système par défaut.** Selon les règles de l'art, le partage de comptes (ex: utiliser tous le même utilisateur `debian`) est proscrit car cela empêche la traçabilité et l'auditabilité des actions. Chaque administrateur doit disposer de son propre compte nominatif (ex: `l.medo`). Une fois ces comptes créés, le compte générique fourni à l'installation doit être verrouillé.
+1.  **Désactiver le compte système par défaut.** Selon les règles de l'art, le partage de comptes (ex: utiliser tous le même utilisateur `debian`) est proscrit car cela empêche la traçabilité et l'auditabilité des actions. Chaque administrateur doit disposer de son propre compte nominatif (ex: `louismedo`). Une fois ces comptes créés, le compte générique fourni à l'installation doit être verrouillé.
 
     **⚠️ Attention ! Vérifiez bien que vos compte administrateur nominatif fonctionnent avant de désactiver le compte `debian`.
 
