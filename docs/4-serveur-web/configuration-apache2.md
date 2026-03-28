@@ -230,12 +230,13 @@ Pour éviter qu'une requête pointant vers un sous-domaine inexistant n'affiche 
 
     ```bash
     sudo mkdir -p /var/www/default
-    echo "<h1>Aucun portfolio trouvé à cette adresse.</h1>" | sudo tee /var/www/default/index.html
+    # Coller le contenue de la page d'informations
+    sudoedit /var/www/default/index.html
     ```
 
-    `mkdir -p` : Crée le répertoire parent manquant si nécessaire.
+    👉 [Code source de la page d'informations](./page-html/no-portfolio.txt)
 
-    `tee` : Insère la balise HTML dans le fichier statique cible en tant que super-administrateur.
+    `mkdir -p` : Crée le répertoire parent manquant si nécessaire.
 
 2.  **Création du VirtualHost de secours.** Ce fichier doit être chargé en premier par Apache, d'où le préfixe `000`.
 
@@ -249,11 +250,14 @@ Pour éviter qu'une requête pointant vers un sous-domaine inexistant n'affiche 
     <VirtualHost *:80>
         ServerName default
         DocumentRoot /var/www/default
+        
+        Redirect permanent / https://default/
     </VirtualHost>
 
     <VirtualHost *:443>
         ServerName default
         DocumentRoot /var/www/default
+
         SSLEngine on
         SSLCertificateFile /etc/letsencrypt/live/bts-sio.eu/fullchain.pem
         SSLCertificateKeyFile /etc/letsencrypt/live/bts-sio.eu/privkey.pem
@@ -287,11 +291,14 @@ Afin de maintenir une présentation professionnelle et de ne pas exposer l'archi
 
     ```bash
     sudo mkdir -p /var/www/errors
-    echo "<h1>Erreur 404 - Page introuvable</h1>" | sudo tee /var/www/errors/404.html
-    echo "<h1>Erreur 403 - Accès interdit</h1>" | sudo tee /var/www/errors/403.html
+    # Coller le contenue des pages d'erreur
+    sudoedit /var/www/errors/404.html
+    sudoedit /var/www/errors/403.html
     ```
 
-    `echo "..." | sudo tee` : Crée rapidement les fichiers HTML correspondants aux codes d'erreur standards.
+    👉 [Code source - erreur 404](./page-html/404.txt)
+    👉 [Code source - erreur 403](./page-html/403.txt)
+    
 
 2.  **Définition des alias et des documents d'erreur.** Configuration d'un bloc global pour que l'ensemble des VirtualHosts utilise ces nouvelles pages.
 
