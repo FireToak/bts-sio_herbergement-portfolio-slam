@@ -76,7 +76,7 @@ Cette section recense deux scénarios possibles pour le déploiement automatisé
     3. Cet événement de fusion déclenche un Webhook qui notifie le VPS.
     4. Le VPS exécute un script local réalisant un `git pull` sur le dossier de l'étudiant ciblé.
 
-- **Avantage :** Contrôle total avant mise en production).
+- **Avantage :** Contrôle total avant mise en production.
 
 ### 5.2 Scénario B : Déploiement continu (CI/CD)
 
