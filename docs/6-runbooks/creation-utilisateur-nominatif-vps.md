@@ -26,14 +26,14 @@ Cette procédure explique comment créer un compte administrateur nominatif sur 
 1.  **Créer le nouvel utilisateur.** Connectez-vous au serveur avec un compte disposant des droits administrateur pour générer l'espace de travail du nouvel utilisateur.
 
     ```bash
-    sudo adduser louismedo
+    sudo adduser <nom-prenom>
     ```
 
     `sudo` : Exécute la commande avec les privilèges super-administrateur (root).
 
-    `adduser` : Script interactif qui crée l'utilisateur, son répertoire personnel (`/home/louismedo`) et demande la configuration d'un mot de passe initial.
+    `adduser` : Script interactif qui crée l'utilisateur, son répertoire personnel (`/home/<nomprenom>`) et demande la configuration d'un mot de passe initial.
 
-    `louismedo` : L'identifiant cible (convention : prénom + nom).
+    `<nomprenom>` : L'identifiant cible (convention : prénom + nom).
 
 2.  **Accorder les privilèges d'administration.** Le nouvel utilisateur doit pouvoir exécuter des tâches de maintenance.
 

@@ -20,7 +20,3 @@ Le Guide Utilisateur (Pour les étudiants) : Un document expliquant comment stru
 
 Documentation sur le PRA
 Guide utilisation - Création du dépôt portfolio pour les étudiants
-
----
-
-Création du dépôt template pour les étudiants

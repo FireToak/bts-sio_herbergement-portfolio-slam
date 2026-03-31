@@ -47,10 +47,10 @@ Ce document décrit les étapes nécessaires pour configurer le serveur VPS afin
 1.  **Attribuer la propriété des dossiers au compte de service.** Le dossier contenant les portfolios doit pouvoir être modifié par l'utilisateur CI/CD, tout en restant lisible par le serveur web Apache (`www-data`).
 
     ```bash
-    sudo chown -R github-deploy-portfolio:www-data /var/www/portfolios/
+    sudo chown -R github-deploy-portfolio:www-data /var/www/portfolio/
     ```
 
-    `chown` : Commande pour modifier le propriétaire (CHange OWNer).
+    `chown` : Commande pour modifier le propriétaire (Change owner).
 
     `-R` : Applique la modification de manière récursive à tous les sous-dossiers et fichiers.
 
@@ -59,7 +59,7 @@ Ce document décrit les étapes nécessaires pour configurer le serveur VPS afin
 2.  **Verrouiller les permissions (Principe de moindre privilège).**
 
     ```bash
-    sudo chmod -R 754 /var/www/portfolios/
+    sudo chmod -R 754 /var/www/portfolio/
     ```
 
     `chmod` : Modifie les permissions d'accès aux fichiers.
@@ -94,7 +94,7 @@ Ce document décrit les étapes nécessaires pour configurer le serveur VPS afin
         exit 1
     fi
 
-    git -C "/var/www/portfolios/$ETUDIANT" pull origin main
+    git -C "/var/www/portfolio/$ETUDIANT" pull origin main
     ```
 
     `#!/bin/bash` : Indique au système d'utiliser Bash pour exécuter le script.

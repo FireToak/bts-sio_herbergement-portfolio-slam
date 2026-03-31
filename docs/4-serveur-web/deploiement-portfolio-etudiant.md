@@ -29,7 +29,7 @@ Chaque étudiant se voit attribuer un utilisateur système sans droit de connexi
 1. **Création de l'utilisateur dédié.** (Remplacer `<nom-prenom>` par l'identifiant de l'étudiant comme par exemple : `pierre-jean`).
 
     ```bash
-    sudo adduser --system --group --disabled-login www-<nom-prenom>
+    sudo adduser --system --group --disabled-login portfolio-<nom-prenom>
     ```
 
     `adduser` : Crée un nouvel utilisateur et un groupe du même nom.
@@ -41,22 +41,23 @@ Chaque étudiant se voit attribuer un utilisateur système sans droit de connexi
 2. **Ajout d'Apache au groupe de l'étudiant.**
 
     ```bash
-    sudo usermod -aG www-<nom-prenom> www-data
+    sudo usermod -aG portfolio-<nom-prenom> www-data
     ```
 
-    `usermod -aG` : Ajoute l'utilisateur système `www-data` (Apache) au groupe `www-<nom-prenom>` pour lui permettre de lire les fichiers statiques (HTML, CSS, images).
+    `usermod -aG` : Ajoute l'utilisateur système `www-data` (Apache) au groupe `portfolio-<nom-prenom>` pour lui permettre de lire les fichiers statiques (HTML, CSS, images).
 
 3. **Création du répertoire web et application des droits.**
 
     ```bash
-    sudo mkdir -p /var/www/etu-nom/public_html
-    sudo chown -R etu-nom:etu-nom /var/www/www-<nom-prenom>
-    sudo chmod -R 750 /var/www/www-<nom-prenom>
+    sudo mkdir -p /var/www/portfolio
+    sudo mkdir -p /var/www/portfolio/portfolio-<nom-prenom>
+    sudo chown -R portfolio-<nom-prenom>:portfolio-<nom-prenom> /var/www/portfolio/portfolio-<nom-prenom>
+    sudo chmod -R 750 /var/www/portfolio/portfolio-<nom-prenom>
     ```
 
     `mkdir -p` : Crée l'arborescence complète du répertoire cible.
 
-    `chown -R` : Attribue la propriété du dossier et de son contenu à l'utilisateur et au groupe `etu-nom`.
+    `chown -R` : Attribue la propriété du dossier et de son contenu à l'utilisateur et au groupe `portfolio-<nom-prenom>`.
 
     `chmod -R 750` : Accorde tous les droits au propriétaire (`7`), les droits de lecture et d'exécution au groupe (`5` - permet à Apache de lire), et aucun droit aux autres utilisateurs (`0`).
 
@@ -68,7 +69,7 @@ La création d'un "Pool" FPM spécifique force l'exécution des scripts PHP sous
 1. **Création du fichier de configuration du pool.**
 
     ```bash
-    sudoedit /etc/php/8.4/fpm/pool.d/www-<nom-prenom>.conf
+    sudoedit /etc/php/8.4/fpm/pool.d/portfolio-<nom-prenom>.conf
     ```
 
 2. **Ajout des directives de configuration.** 
@@ -76,11 +77,11 @@ La création d'un "Pool" FPM spécifique force l'exécution des scripts PHP sous
     *Insérer le contenu suivant :*
 
     ```ini
-    [etu-nom]
-    user = www-<nom-prenom>
-    group = www-<nom-prenom>
+    [portfolio-<nom-prenom>]
+    user = portfolio-<nom-prenom>
+    group = portfolio-<nom-prenom>
 
-    listen = /run/php/php8.4-fpm-www-<nom-prenom>.sock
+    listen = /run/php/php8.4-fpm-portfolio-<nom-prenom>.sock
     listen.owner = www-data
     listen.group = www-data
 
@@ -91,7 +92,7 @@ La création d'un "Pool" FPM spécifique force l'exécution des scripts PHP sous
     pm.max_spare_servers = 3
     ```
 
-    `[www-<nom-prenom>]` : Nomme le pool d'exécution.
+    `[portfolio-<nom-prenom>]` : Nomme le pool d'exécution.
 
     `user / group` : Définit l'identité sous laquelle le code PHP sera exécuté.
 
@@ -104,14 +105,14 @@ La création d'un "Pool" FPM spécifique force l'exécution des scripts PHP sous
 ---
 ## 3. Déploiement du code source
 
-1. **Transfert des fichiers.** Copier les fichiers du portfolio de l'étudiant dans le répertoire `/var/www/www-<nom-prenom>/public_html/`.
+1. **Transfert des fichiers.** Copier les fichiers du portfolio de l'étudiant dans le répertoire `/var/www/portfolio`.
 
 2. **Sécurisation finale des fichiers.** S'assurer que les droits sont corrects après l'importation.
 
     ```bash
-    sudo chown -R www-<nom-prenom>:www-<nom-prenom> /var/www/www-<nom-prenom>/public_html
-    sudo find /var/www/www-<nom-prenom>/public_html -type d -exec chmod 750 {} \;
-    sudo find /var/www/www-<nom-prenom>/public_html -type f -exec chmod 640 {} \;
+    sudo chown -R github-deploy-portfolio:portfolio-<nom-prenom> /var/www/portfolio/portfolio-<nom-prenom>
+    sudo find /var/www/portfolio/portfolio-<nom-prenom> -type d -exec chmod 750 {} \;
+    sudo find /var/www/portfolio/portfolio-<nom-prenom> -type f -exec chmod 640 {} \;
     ```
 
     `find -type d -exec chmod 750` : Applique les droits de lecture/exécution (accès) uniquement aux dossiers.
@@ -126,7 +127,7 @@ Pour router le trafic vers le bon dossier et le bon socket PHP, un hôte virtuel
 1. **Création du fichier de configuration.**
 
     ```bash
-    sudoedit /etc/apache2/sites-available/www-<nom-prenom>.conf
+    sudoedit /etc/apache2/sites-available/portfolio-<nom-prenom>.conf
     ```
 
 2. **Application du modèle.** Copier le contenu du modèle standardisé et remplacer les variables d'environnement (nom de domaine, chemins et socket FPM).
@@ -139,7 +140,7 @@ Pour router le trafic vers le bon dossier et le bon socket PHP, un hôte virtuel
 1. **Activation du site.**
 
     ```bash
-    sudo a2ensite www-<nom-prenom>.conf
+    sudo a2ensite portfolio-<nom-prenom>.conf
     ```
 
     `a2ensite` : Crée le lien symbolique activant le nouveau VirtualHost.
@@ -148,11 +149,14 @@ Pour router le trafic vers le bon dossier et le bon socket PHP, un hôte virtuel
 
     ```bash
     sudo apachectl configtest
+    sudo php-fpm8.4 -t
     sudo systemctl restart php8.4-fpm
     sudo systemctl reload apache2
     ```
 
     `apachectl configtest` : Vérifie l'absence d'erreurs de syntaxe dans les configurations d'hôtes virtuels.
+
+    `php-fpm8.4 -t` : Vérifie l'absence d'erreurs de syntaxe dans les configurations de fpm.
 
     `systemctl restart php8.4-fpm` : Démarre le nouveau pool d'isolation dédié à l'étudiant.
 
