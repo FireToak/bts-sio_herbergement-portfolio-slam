@@ -51,7 +51,7 @@ Chaque étudiant se voit attribuer un utilisateur système sans droit de connexi
     ```bash
     sudo mkdir -p /var/www/portfolio
     sudo mkdir -p /var/www/portfolio/portfolio-<nom-prenom>
-    sudo chown -R portfolio-<nom-prenom>:portfolio-<nom-prenom> /var/www/portfolio/portfolio-<nom-prenom>
+    sudo chown -R github-deploy-portfolio:portfolio-<nom-prenom> /var/www/portfolio/portfolio-<nom-prenom>
     sudo chmod -R 750 /var/www/portfolio/portfolio-<nom-prenom>
     ```
 
@@ -161,3 +161,16 @@ Pour router le trafic vers le bon dossier et le bon socket PHP, un hôte virtuel
     `systemctl restart php8.4-fpm` : Démarre le nouveau pool d'isolation dédié à l'étudiant.
 
     `systemctl reload apache2` : Prend en compte le nouveau site web de manière transparente.
+
+---
+## 6. Récupération du .git
+
+1. **Clonage et configuration de l'exception Git.**
+
+    ```bash
+    sudo -u github-deploy-portfolio git clone <URL_DU_DEPOT> /var/www/portfolio/portfolio-<nom-prenom>
+    ```
+
+    `sudo -u github-deploy-portfolio` : Exécute la commande qui suit spécifiquement sous l'identité de l'utilisateur de déploiement (et non en tant que `root`). Cela garantit que le dossier `.git` est créé avec le bon propriétaire natif.
+
+    `git clone` : Télécharge le dépôt directement depuis GitHub vers le dossier cible.

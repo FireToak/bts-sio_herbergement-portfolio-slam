@@ -20,3 +20,10 @@ Le Guide Utilisateur (Pour les étudiants) : Un document expliquant comment stru
 
 Documentation sur le PRA
 Guide utilisation - Création du dépôt portfolio pour les étudiants
+
+---
+
+Faire une étude sur la consommation des sites portfolio de chaque étudiant
+Faire une étude sur l'infrastructure que pourrais avoir l'hébergement des portfolios avec plusieurs VPS pour assurer une redondances.
+
+12 portfolios
